@@ -19,7 +19,7 @@ const ClientGreeting = ({ initialUserName }: ClientGreetingProps) => {
       <h2>Client Component (Interactive)</h2>
       <p>Hello, **{name}**! Click the button to change the name locally.</p>
       
-      <button onClick={handleClick} style={{ padding: '8px 16px' }}>
+      <button onClick={handleClick} style={{ padding: '8px 16px', border: '1px solid black' }}>
         Change Name
       </button>
       

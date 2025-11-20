@@ -1,7 +1,7 @@
 // app/page.tsx (Server Component - default)
 
 import { User } from "@/shared/types";
-import ClientGreeting from "./ClientGreeting";
+import ClientGreeting from "../src/components/ClientGreeting";
 
 async function getFakeUserData(): Promise<User> {
   const res = await fetch('https://jsonplaceholder.typicode.com/users/1');
