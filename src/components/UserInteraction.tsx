@@ -58,8 +58,8 @@ const handleSave = async (updatedUser: User) => {
           user={currentData} 
           onSave={handleSave} 
           onCancel={toggleEdit} 
-          isSaving={loading}
-        />
+/*           isSaving={loading}
+ */        />
       ) : (
         <UserDisplay user={currentData} /> 
       )}

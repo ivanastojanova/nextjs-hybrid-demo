@@ -7,8 +7,8 @@ interface UserFormProps {
   user?: User; 
   onSave: (formData: User) => void;
   onCancel: () => void;
-  isSaving: boolean;
-}
+/*   isSaving: boolean;
+ */}
 
 export default function UserForm({ user, onSave, onCancel }: UserFormProps) {
   // Initialize state with prop data (for edit) or empty values (for create)

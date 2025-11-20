@@ -1,43 +1,33 @@
 // app/page.tsx (Server Component - default)
 
 import { User } from "@/shared/types";
-import { updateUser } from "@/src/components/lib/actions";
-import UserInteraction from "@/src/components/UserInteraction";
+import ListWrapper from "@/src/components/ListWrapper";
 
 
-async function getFakeUserData(): Promise<User> {
-  const res = await fetch('https://jsonplaceholder.typicode.com/users/1', {
+// fetch function to get a list of users
+async function getUsersData(): Promise<User[]> {
+  console.log("[SERVER] Fetching list of users...");
+  const res = await fetch('https://jsonplaceholder.typicode.com/users?_limit=5', {
     cache: 'no-store'
   });
   if (!res.ok) {
-    throw new Error('Failed to fetch user data');
+    throw new Error('Failed to fetch user list');
   }
-  const user: User = await res.json();
-
-  // Simulate network delay (2 seconds)
-  await new Promise(resolve => setTimeout(resolve, 2000));
-  return user;
+  const users: User[] = await res.json();
+  await new Promise(resolve => setTimeout(resolve, 1500)); // Simulate delay
+  return users;
 }
 
 export default async function HomePage() {
-  const user: User = await getFakeUserData();
+const users: User[] = await getUsersData();
 
 return (
-    <main style={{ 
-      display: 'flex', 
-      minHeight: '100vh', 
-      flexDirection: 'column', 
-      alignItems: 'center', 
-      justifyContent: 'center', 
-      padding: '40px', 
-      backgroundColor: '#e5e7eb' 
-    }}>
+    <main style={{ padding: '40px', maxWidth: '800px', margin: '0 auto', backgroundColor: '#f5f5f5' }}>
       <h1 style={{ fontSize: '2rem', fontWeight: 'extrabold', marginBottom: '20px', color: '#1f2937' }}>
-        Next.js CRUD Flow: Step 3 (UPDATE)      
+        User Management Dashboard (READ & CREATE)
       </h1>
 
-      <UserInteraction user={user} updateFn={updateUser} />
-
+      <ListWrapper initialUsers={users} /> 
     </main>
 );
 }
