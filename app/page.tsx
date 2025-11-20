@@ -1,8 +1,7 @@
 // app/page.tsx (Server Component - default)
 
 import { User } from "@/shared/types";
-
-import UserDisplay from "../src/components/UserDisplay";
+import UserInteraction from "@/src/components/UserInteraction";
 
 async function getFakeUserData(): Promise<User> {
   const res = await fetch('https://jsonplaceholder.typicode.com/users/1', {
@@ -35,7 +34,7 @@ return (
         Next.js CRUD Flow: Step 1 (READ)
       </h1>
 
-      <UserDisplay user={user} />
+      <UserInteraction user={user} />
 
     </main>
 );
