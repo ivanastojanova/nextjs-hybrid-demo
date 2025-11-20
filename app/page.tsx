@@ -2,6 +2,7 @@
 
 import { User } from "@/shared/types";
 import ClientGreeting from "../src/components/ClientGreeting";
+import ClientCounter from "../src/components/ClientCounter";
 
 async function getFakeUserData(): Promise<User> {
   const res = await fetch('https://jsonplaceholder.typicode.com/users/1');
