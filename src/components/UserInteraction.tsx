@@ -7,19 +7,38 @@ import UserForm from "./UserForm";
 
 interface UserInteractionProps {
   user: User;
+  updateFn: (userData: User) => Promise<any>;
 }
 
-export default function UserInteraction({ user }: UserInteractionProps) {
+export default function UserInteraction({ user, updateFn }: UserInteractionProps) {
   const [isEditing, setIsEditing] = useState(false);
+  const [currentData, setCurrentData] = useState<User>(user); 
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState('');
 
   const toggleEdit = () => {
     setIsEditing(!isEditing);
   };
 
-  const handleSave = (updatedUser: User) => {
-    console.log("Client Component: Form submitted with data:", updatedUser);
-    setIsEditing(false);
+const handleSave = async (updatedUser: User) => {
+    setLoading(true);
+    setMessage('Saving data via Server Action...');
+
+    try {
+      const result = await updateFn(updatedUser); 
+
+      // Update the display data with the returned data
+      setCurrentData(result.updatedData); 
+      setMessage(result.message);
+      setIsEditing(false); // Exit edit mode
+    } catch (error) {
+      setMessage('Error saving data.');
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
   };
+
 
   return (
     <div style={{ padding: '10px', width: '100%', maxWidth: '500px' }}>
@@ -32,19 +51,22 @@ export default function UserInteraction({ user }: UserInteractionProps) {
         </span>
       </div>
 
+      <p style={{ color: 'red', fontWeight: 'bold' }}>{message}</p>
+
       {isEditing ? (
         <UserForm 
-          user={user} // Pre-populates the form with server-fetched data
+          user={currentData} 
           onSave={handleSave} 
           onCancel={toggleEdit} 
+          isSaving={loading}
         />
       ) : (
-        <UserDisplay user={user} />
+        <UserDisplay user={currentData} /> 
       )}
-
       {!isEditing && (
         <button 
           onClick={toggleEdit}
+          disabled={loading}
           style={{ 
             marginTop: '20px', 
             padding: '10px 20px', 
@@ -56,7 +78,7 @@ export default function UserInteraction({ user }: UserInteractionProps) {
             width: '100%'
           }}
         >
-          Edit Profile
+            {loading ? 'Processing...' : 'Edit Profile'}
         </button>
       )}
     </div>

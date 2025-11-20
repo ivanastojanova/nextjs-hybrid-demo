@@ -1,7 +1,9 @@
 // app/page.tsx (Server Component - default)
 
 import { User } from "@/shared/types";
+import { updateUser } from "@/src/components/lib/actions";
 import UserInteraction from "@/src/components/UserInteraction";
+
 
 async function getFakeUserData(): Promise<User> {
   const res = await fetch('https://jsonplaceholder.typicode.com/users/1', {
@@ -31,10 +33,10 @@ return (
       backgroundColor: '#e5e7eb' 
     }}>
       <h1 style={{ fontSize: '2rem', fontWeight: 'extrabold', marginBottom: '20px', color: '#1f2937' }}>
-        Next.js CRUD Flow: Step 1 (READ)
+        Next.js CRUD Flow: Step 3 (UPDATE)      
       </h1>
 
-      <UserInteraction user={user} />
+      <UserInteraction user={user} updateFn={updateUser} />
 
     </main>
 );

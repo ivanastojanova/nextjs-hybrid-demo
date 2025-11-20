@@ -7,6 +7,7 @@ interface UserFormProps {
   user?: User; 
   onSave: (formData: User) => void;
   onCancel: () => void;
+  isSaving: boolean;
 }
 
 export default function UserForm({ user, onSave, onCancel }: UserFormProps) {
