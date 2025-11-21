@@ -1,4 +1,5 @@
 import { User } from "@/shared/types"; 
+import UserRowLink from "./UserRowLink";
 
 interface UserListTableProps {
   users: User[];
@@ -25,26 +26,18 @@ export default function UserListTable({ users }: UserListTableProps) {
         </tr>
       </thead>
       <tbody>
-        {users.map((user, index) => (
-          <tr key={user.id} style={{ 
-            backgroundColor: index % 2 === 0 ? '#f9fafb' : '#ffffff',
-            borderBottom: '1px solid #e5e7eb'
-          }}>
+        {users.map((user) => {
+            console.log(user);
+            return(
+          <UserRowLink key={user.id} user={user}>
             <td style={{ padding: '12px 15px' }}>{user.name}</td>
             <td style={{ padding: '12px 15px' }}>{user.username}</td>
             <td style={{ padding: '12px 15px' }}>{user.email}</td>
             <td style={{ padding: '12px 15px' }}>
-              <button style={{ 
-                padding: '6px 12px', 
-                backgroundColor: '#3b82f6', 
-                color: 'white', 
-                border: 'none', 
-                borderRadius: '4px', 
-                cursor: 'pointer' 
-              }}>Edit</button>
+              View Detail
             </td>
-          </tr>
-        ))}
+          </UserRowLink>)
+        })}
       </tbody>
     </table>
   );
