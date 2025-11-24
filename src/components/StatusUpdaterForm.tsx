@@ -1,9 +1,11 @@
-'use client'; 
+'use client';
 
 import { useState } from 'react';
 
 interface StatusUpdaterFormProps {
-  updateFn: (formData: FormData) => Promise<{ success: boolean; newStatus: FormDataEntryValue | null }>;
+  updateFn: (
+    formData: FormData,
+  ) => Promise<{ success: boolean; newStatus: FormDataEntryValue | null }>;
 }
 
 export default function StatusUpdaterForm({ updateFn }: StatusUpdaterFormProps) {
@@ -12,7 +14,7 @@ export default function StatusUpdaterForm({ updateFn }: StatusUpdaterFormProps) 
 
   const handleFormSubmit = async (formData: FormData) => {
     setLoading(true);
-    const result = await updateFn(formData); 
+    const result = await updateFn(formData);
 
     if (result.success) {
       setStatus(result.newStatus as string);
@@ -25,16 +27,16 @@ export default function StatusUpdaterForm({ updateFn }: StatusUpdaterFormProps) 
       <h3>Client Component: Server Action Trigger</h3>
       <p>Current Server Status (Updated via Server Action): **{status}**</p>
 
-      <form action={handleFormSubmit}> 
-        <input 
-          type="text" 
-          name="statusInput" 
+      <form action={handleFormSubmit}>
+        <input
+          type="text"
+          name="statusInput"
           defaultValue="Working"
           disabled={loading}
           style={{ padding: '8px', marginRight: '10px', border: '1px solid #ccc' }}
         />
-        <button 
-          type="submit" 
+        <button
+          type="submit"
           disabled={loading}
           style={{ padding: '8px 16px', background: loading ? '#ccc' : 'orange', color: 'white' }}
         >

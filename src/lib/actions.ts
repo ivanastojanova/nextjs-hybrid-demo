@@ -1,6 +1,6 @@
 'use server';
 
-import { User } from "@/shared/types";
+import { User } from '@/shared/types';
 
 /**
  * Handles the update operation for a user.
@@ -14,12 +14,12 @@ export async function updateUser(userData: User) {
   // STEP 2: DATABASE INTERACTION (Simulated)
 
   // Simulate a network/database update delay
-  await new Promise(resolve => setTimeout(resolve, 1500)); 
+  await new Promise((resolve) => setTimeout(resolve, 1500));
 
   console.log(`[SERVER ACTION] Successfully updated user data:`, userData);
-  return { 
-    status: 'success', 
+  return {
+    status: 'success',
     message: `User ${userData.name} updated successfully on the server.`,
-    updatedData: userData 
+    updatedData: userData,
   };
 }

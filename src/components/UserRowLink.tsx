@@ -12,16 +12,16 @@ export default function UserRowLink({ user, children }: UserRowLinkProps) {
   const router = useRouter();
 
   const handleClick = () => {
-    router.push(`/profiles/${user.id}`, ); 
+    router.push(`/profiles/${user.id}`);
   };
 
   return (
-    <tr 
+    <tr
       onClick={handleClick}
-      style={{ 
-        cursor: 'pointer', 
-        transition: 'background-color 0.1s', 
-        borderBottom: '1px solid #e5e7eb'
+      style={{
+        cursor: 'pointer',
+        transition: 'background-color 0.1s',
+        borderBottom: '1px solid #e5e7eb',
       }}
     >
       {children}

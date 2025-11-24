@@ -1,4 +1,4 @@
-'use client'; 
+'use client';
 import { useState } from 'react';
 
 export default function ClientCounter() {
@@ -8,7 +8,10 @@ export default function ClientCounter() {
     <div style={{ border: '1px solid gray', padding: '15px', marginTop: '15px' }}>
       <h3>Client Component: Counter</h3>
       <p>Count: **{count}**</p>
-      <button onClick={() => setCount(count + 1)} style={{ border: '1px solid gray', padding: '5px', margin: '5px' }}>
+      <button
+        onClick={() => setCount(count + 1)}
+        style={{ border: '1px solid gray', padding: '5px', margin: '5px' }}
+      >
         Increment
       </button>
     </div>

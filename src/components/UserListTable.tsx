@@ -1,5 +1,5 @@
-import { User } from "@/shared/types"; 
-import UserRowLink from "./UserRowLink";
+import { User } from '@/shared/types';
+import UserRowLink from './UserRowLink';
 
 interface UserListTableProps {
   users: User[];
@@ -11,12 +11,14 @@ export default function UserListTable({ users }: UserListTableProps) {
   }
 
   return (
-    <table style={{ 
-      width: '100%', 
-      borderCollapse: 'collapse', 
-      marginTop: '20px',
-      boxShadow: '0 4px 6px rgba(0,0,0,0.1)' 
-    }}>
+    <table
+      style={{
+        width: '100%',
+        borderCollapse: 'collapse',
+        marginTop: '20px',
+        boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+      }}
+    >
       <thead style={{ backgroundColor: '#1f2937', color: 'white' }}>
         <tr>
           <th style={{ padding: '12px 15px', textAlign: 'left' }}>Name</th>
@@ -27,16 +29,15 @@ export default function UserListTable({ users }: UserListTableProps) {
       </thead>
       <tbody>
         {users.map((user) => {
-            console.log(user);
-            return(
-          <UserRowLink key={user.id} user={user}>
-            <td style={{ padding: '12px 15px' }}>{user.name}</td>
-            <td style={{ padding: '12px 15px' }}>{user.username}</td>
-            <td style={{ padding: '12px 15px' }}>{user.email}</td>
-            <td style={{ padding: '12px 15px' }}>
-              View Detail
-            </td>
-          </UserRowLink>)
+          console.log(user);
+          return (
+            <UserRowLink key={user.id} user={user}>
+              <td style={{ padding: '12px 15px' }}>{user.name}</td>
+              <td style={{ padding: '12px 15px' }}>{user.username}</td>
+              <td style={{ padding: '12px 15px' }}>{user.email}</td>
+              <td style={{ padding: '12px 15px' }}>View Detail</td>
+            </UserRowLink>
+          );
         })}
       </tbody>
     </table>
