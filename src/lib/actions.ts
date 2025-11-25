@@ -1,6 +1,7 @@
 'use server';
 
 import { User } from '@/shared/types';
+import { redirect } from 'next/navigation';
 
 /**
  * Handles the update operation for a user.
@@ -22,4 +23,13 @@ export async function updateUser(userData: User) {
     message: `User ${userData.name} updated successfully on the server.`,
     updatedData: userData,
   };
+}
+
+export async function createUser(newUser: Omit<User, 'id'>) {
+  console.log(newUser);
+  redirect('/');
+}
+
+export async function cancelCallback() {
+  redirect('/');
 }

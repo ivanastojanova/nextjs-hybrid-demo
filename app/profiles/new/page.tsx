@@ -1,10 +1,16 @@
-export default function NewUserFormPage() {
-  console.log('[SERVER] New User Form Route Reached Successfully');
+import BackButton from '@/src/components/BackButton';
+import NewUserForm from '@/src/components/NewUserForm';
+import { createUser, cancelCallback } from '../../../src/lib/actions';
 
+export default function NewUserFormPage() {
   return (
-    <main>
-      <h1>New User Form (Static Route Test)</h1>
-      <p>If you see this, the routing for `/profiles/new` is working.</p>
+    <main
+      style={{ padding: '40px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}
+    >
+      <BackButton />
+      <h1 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '30px' }}>New User:</h1>
+
+      <NewUserForm onSaveSuccess={createUser} onCancel={cancelCallback} />
     </main>
   );
 }
