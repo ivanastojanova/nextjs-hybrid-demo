@@ -1,6 +1,7 @@
 import { User } from '@/shared/types';
 import { updateUser } from '../../../src/lib/actions';
 import UserInteraction from '../../../src/components/UserInteraction';
+import BackButton from '@/src/components/BackButton';
 
 interface UserDetailPageProps {
   params: Promise<{ userId: string }>;
@@ -25,8 +26,6 @@ async function getUserData(userId: string): Promise<User> {
 
 export default async function UserDetailPage({ params }: UserDetailPageProps) {
   const { userId } = await params;
-
-  console.log('[SERVER] userId:', userId);
 
   let user: User | null = null;
 
@@ -59,6 +58,7 @@ export default async function UserDetailPage({ params }: UserDetailPageProps) {
     <main
       style={{ padding: '40px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}
     >
+      <BackButton />
       <h1 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '30px' }}>
         User Detail: {user.name}
       </h1>
