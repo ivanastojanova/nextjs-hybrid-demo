@@ -15,8 +15,7 @@ export default function NewUserForm({ onSaveSuccess, onCancel }: NewUserFormProp
   };
 
   return (
-    <div style={{ border: '1px solid #ccc', padding: '20px', borderRadius: '8px' }}>
-      <h3>Create New User</h3>
+    <div style={{ padding: '10px', width: '100%', maxWidth: '500px' }}>
       <UserForm onSave={handleSave} onCancel={onCancel} />
     </div>
   );
