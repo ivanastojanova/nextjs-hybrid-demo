@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { User } from '@/shared/types';
 import UserDisplay from './UserDisplay';
-import UserForm from './UserForm';
+import UserEditFormWrapper from './UserEditFormWrapper';
 
 interface UserInteractionProps {
   user: User;
@@ -18,25 +18,6 @@ export default function UserInteraction({ user, updateFn }: UserInteractionProps
 
   const toggleEdit = () => {
     setIsEditing(!isEditing);
-  };
-
-  const handleSave = async (updatedUser: User) => {
-    setLoading(true);
-    setMessage('Saving data via Server Action...');
-
-    try {
-      const result = await updateFn(updatedUser);
-
-      // Update the display data with the returned data
-      setCurrentData(result.updatedData);
-      setMessage(result.message);
-      setIsEditing(false); // Exit edit mode
-    } catch (error) {
-      setMessage('Error saving data.');
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
   };
 
   return (
@@ -55,12 +36,12 @@ export default function UserInteraction({ user, updateFn }: UserInteractionProps
       <p style={{ color: 'red', fontWeight: 'bold' }}>{message}</p>
 
       {isEditing ? (
-        <UserForm
+        <UserEditFormWrapper
           user={currentData}
-          onSave={handleSave}
+          updateFn={updateFn}
           onCancel={toggleEdit}
-          /*           isSaving={loading}
-           */
+          setMessage={setMessage}
+          setLoading={setLoading}
         />
       ) : (
         <UserDisplay user={currentData} />

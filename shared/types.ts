@@ -1,7 +1,7 @@
 export interface User {
-  id: number;
+  id: string;
   name: string;
-  username: string;
+  username?: string;
   email: string;
   // address?: {
   //   street: string;
@@ -13,8 +13,8 @@ export interface User {
   //     lng: string;
   //   };
   // };
-  phone: string;
-  website: string;
+  phone?: string;
+  website?: string;
   // company?: {
   //   name: string;
   //   catchPhrase: string;

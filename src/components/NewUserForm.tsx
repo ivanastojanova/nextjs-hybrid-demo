@@ -1,22 +1,54 @@
+// src/components/NewUserForm.tsx
 'use client';
 
 import UserForm from './UserForm';
-import { User } from '@/shared/types';
+import { createUser, cancelAction } from '@/src/lib/actions';
 
-interface NewUserFormProps {
-  onSaveSuccess: (newUser: Omit<User, 'id'>) => void;
-  onCancel: () => void;
-}
-
-export default function NewUserForm({ onSaveSuccess, onCancel }: NewUserFormProps) {
-  const handleSave = (newUser: Omit<User, 'id'>) => {
-    console.log('Client Component: Preparing to save new user:', newUser);
-    onSaveSuccess(newUser);
-  };
-
+export default function NewUserForm() {
   return (
     <div style={{ padding: '10px', width: '100%', maxWidth: '500px' }}>
-      <UserForm onSave={handleSave} onCancel={onCancel} />
+      <form action={createUser}>
+        <UserForm formName="new-user" />
+
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            marginTop: '20px',
+            padding: '0 25px',
+          }}
+        >
+          <button
+            type="submit"
+            formAction={cancelAction}
+            formNoValidate
+            style={{
+              padding: '10px 20px',
+              backgroundColor: '#9ca3af',
+              color: 'white',
+              border: 'none',
+              borderRadius: '4px',
+              cursor: 'pointer',
+            }}
+          >
+            Cancel
+          </button>
+
+          <button
+            type="submit"
+            style={{
+              padding: '10px 20px',
+              backgroundColor: '#f97316',
+              color: 'white',
+              border: 'none',
+              borderRadius: '4px',
+              cursor: 'pointer',
+            }}
+          >
+            Save User
+          </button>
+        </div>
+      </form>
     </div>
   );
 }

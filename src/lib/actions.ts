@@ -1,35 +1,58 @@
 'use server';
 
-import { User } from '@/shared/types';
 import { redirect } from 'next/navigation';
+import { User } from '@/shared/types';
 
-/**
- * Handles the update operation for a user.
- * @param userData The updated user object, including the ID.
- * @returns A status message.
- */
-export async function updateUser(userData: User) {
-  console.log(`[SERVER ACTION] Received update request for User ID: ${userData.id}`);
+// ---------------------------------------------
+// Updated updateUser to accept FormData
+// ---------------------------------------------
+export async function updateUser(formData: FormData) {
+  const id = formData.get('id') as string;
+  const name = formData.get('name') as string;
+  const email = formData.get('email') as string;
+  const username = formData.get('username') as string;
+  const phone = formData.get('phone') as string;
+  const website = formData.get('website') as string;
 
-  // STEP 1: SERVER-SIDE VALIDATION
-  // STEP 2: DATABASE INTERACTION (Simulated)
+  if (!id) throw new Error('User ID is missing for update operation.');
 
-  // Simulate a network/database update delay
+  const updatedUserData: User = {
+    id: id,
+    name: name,
+    email: email,
+    username: username,
+    phone: phone,
+    website: website,
+  };
+
+  console.log(`[SERVER ACTION] Received update request for User ID: ${id}`);
   await new Promise((resolve) => setTimeout(resolve, 1500));
 
-  console.log(`[SERVER ACTION] Successfully updated user data:`, userData);
-  return {
-    status: 'success',
-    message: `User ${userData.name} updated successfully on the server.`,
-    updatedData: userData,
-  };
+  console.log(`[SERVER ACTION] Successfully updated user data:`, updatedUserData);
+
+  redirect(`/profiles/${id}`);
 }
 
-export async function createUser(newUser: Omit<User, 'id'>) {
-  console.log(newUser);
+// ---------------------------------------------
+// Updated createUser to accept FormData
+// ---------------------------------------------
+export async function createUser(formData: FormData) {
+  const name = formData.get('name') as string;
+  const email = formData.get('email') as string;
+  const username = formData.get('username') as string;
+  const phone = formData.get('phone') as string;
+  const website = formData.get('website') as string;
+
+  if (!name || !email) throw new Error('Name and Email are required.');
+
+  const newUser = { name, email, username, phone, website };
+
+  console.log(`[SERVER ACTION] Creating new user:`, newUser);
+  await new Promise((resolve) => setTimeout(resolve, 1500));
+
   redirect('/');
 }
 
-export async function cancelCallback() {
+export async function cancelAction() {
   redirect('/');
 }

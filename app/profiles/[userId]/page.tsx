@@ -1,6 +1,5 @@
 import { User } from '@/shared/types';
-import { updateUser } from '../../../src/lib/actions';
-import UserInteraction from '../../../src/components/UserInteraction';
+import UserActionWrapper from '@/src/components/UserActionWrapper';
 import BackButton from '@/src/components/BackButton';
 
 interface UserDetailPageProps {
@@ -44,7 +43,6 @@ export default async function UserDetailPage({ params }: UserDetailPageProps) {
     console.error(error);
   }
 
-  // JSX returned *outside* try/catch
   if (!user) {
     return (
       <main style={{ padding: '40px' }}>
@@ -63,7 +61,7 @@ export default async function UserDetailPage({ params }: UserDetailPageProps) {
         User Detail: {user.name}
       </h1>
 
-      <UserInteraction user={user} updateFn={updateUser} />
+      <UserActionWrapper user={user} />
     </main>
   );
 }
